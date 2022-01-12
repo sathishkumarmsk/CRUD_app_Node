@@ -1,5 +1,7 @@
 const express = require('express');
 const res = require('express/lib/response');
+
+const bodyParser = require('body-parser')
 const app = express();
 
 
@@ -19,6 +21,22 @@ app.get('/', (req, res) => {
 })
 */
 
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.get('/', (req, res) => {/*...*/ })
+
+app.post('/quotes', (req,res) => {
+    console.log(req.body)
+} )
+
+
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 })
+ 
+
+app.post('/quotes', (req, res) => {
+    console.log('Helloooo!')
+})
+
