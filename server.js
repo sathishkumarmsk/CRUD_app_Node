@@ -12,6 +12,13 @@ app.get('/',function(req, res) {
     res.send('Hello World')
 })
 */
+
+/*
 app.get('/', (req, res) => {
     res.send('Hello World')
+})
+*/
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html')
 })
