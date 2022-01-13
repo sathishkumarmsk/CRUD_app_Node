@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser= require('body-parser')
 const app = express();
+
 const MongoClient = require('mongodb').MongoClient
 
 
@@ -13,11 +14,18 @@ MongoClient.connect("mongodb+srv://sathish:msk@msk.sxiew.mongodb.net/backend-dev
 
 
 
+
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static('public'))
+app.use(bodyParser.json())
 app.listen(3000, function() {
     console.log('listening on 3000')
   })
   
+  app.put('/quotes', (req, res) => {
+    console.log(req.body)
+  })
+
   app.get('/', (req, res) => {
       db.collection('quotes').find().toArray()
         .then(results => {
@@ -32,11 +40,15 @@ app.listen(3000, function() {
     
   })
 
+
   app.post('/quotes', (req, res) => {
     quotesCollection.insertOne(req.body)
       .then(result => {
         res.redirect('/')
       })
+
+      
+
       .catch(error => console.error(error))
   })
 })
