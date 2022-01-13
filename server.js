@@ -19,6 +19,14 @@ app.listen(3000, function() {
   })
   
   app.get('/', (req, res) => {
+      db.collection('quotes').find().toArray()
+        .then(results => {
+            console.log(results)
+        })
+        .catch(error => console.error(error))
+      /*const cursor = db.collection('quotes').find()
+      console.log(cursor)*/
+
     res.sendFile(__dirname + '/index.html')
     
   })
@@ -26,7 +34,7 @@ app.listen(3000, function() {
   app.post('/quotes', (req, res) => {
     quotesCollection.insertOne(req.body)
       .then(result => {
-        console.log(result)
+        res.redirect('/')
       })
       .catch(error => console.error(error))
   })
